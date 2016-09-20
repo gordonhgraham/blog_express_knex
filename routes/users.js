@@ -27,16 +27,19 @@ router.post(`/`, function(req, res) {
   });
 });
 
-// router.put(`/:id`, function(req, res) {
-//   res.send(`this will update a user`);
-// });
+router.put(`/:id`, function(req, res) {
+  console.log(req.body);
+  res.redirect('/users')
+});
 
 // router.delete(`/:id`, function(req, res) {
 //   res.send(`this will delete a user`);
 // });
 
-// router.get(`/:id/edit`, function(req, res) {
-//   res.send(`this displays the edit form`);
-// });
+router.get(`/:id/edit`, function(req, res) {
+  db.getOneUser(req.params.id).then(user => {
+    res.render('users/edit', { user: user })
+  })
+});
 
 module.exports = router;
